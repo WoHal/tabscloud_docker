@@ -1,6 +1,6 @@
 module.exports = {
     server: {
-        host: '127.0.0.1',
+        host: 'redis',
         port: 6379,
         family: 4,
         db: 0
