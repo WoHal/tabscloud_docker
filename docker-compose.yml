@@ -1,7 +1,7 @@
 version: '3'
 services:
     web:
-        build: .
+        image: "wohal/tabcloud"
         ports:
          - "8033:8033"
     redis:
