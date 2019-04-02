@@ -1,7 +1,11 @@
-FROM ubuntu:16.04
+FROM node
 
-RUN apt updte && apt install nodejs
+EXPOSE 8033
 
-COPY ./server /home
+RUN apt update && \
+    apt install redis-server -y && \
+    redis-server --daemonize yes
 
-RUN cd /home/server && npm install && npm start
+CMD npm install && npm start
+
+EOF
