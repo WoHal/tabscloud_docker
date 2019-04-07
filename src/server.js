@@ -90,6 +90,7 @@ module.exports = {
               data[key] = JSON.parse(data[key]);
             }
           }
+          ctx.append('Access-Control-Allow-Origin', '*');
           ctx.body = helper.resultJson({
             status: 0,
             data
@@ -97,6 +98,11 @@ module.exports = {
         } catch(e) {
           ctx.body = helper.resultFalse();
         }
+      })
+      .options('/:year/:month/:day', (ctx, next) => {
+        ctx.append('Access-Control-Allow-Origin', '*');
+        ctx.append('Access-Control-Allow-Headers', '*');
+        return next();
       })
       .post('/:year/:month/:day', async ctx => {
         try {
@@ -109,6 +115,7 @@ module.exports = {
           } else {
             await redis.hmset(name, key, JSON.stringify(ctx.request.body));
           }
+          ctx.append('Access-Control-Allow-Origin', '*');
           ctx.body = helper.resultTrue();
         } catch(e) {
           console.log(e);
